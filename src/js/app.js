@@ -4,9 +4,10 @@ App = {
 
     localData:{
         //httpProvider:'http://localhost:8545',
-        httpProvider:'http://139.199.180.239:9527',
-        userKey:"0x5d931ee908a0134698f93d1f1d5ec4edbdc074f7",
-        delegates:["0x221e35a7a795083abdfb9cc6c44b976d8ba3c869"],
+        httpProvider:'http://139.199.180.239:8545',
+        opaccount:'0x2716eb344548927bff266b16edb10d9c911121f4',//yqtc test account
+        userKey:"0x107362a23d30ac84799d04718f7af836df59c9c9",
+        delegates:["0x2716eb344548927bff266b16edb10d9c911121f4", "0x2716eb344548927bff266b16edb10d9c911121f4"],
         longTimeLock: 86400,
         shortTimeLock: 7200,
     },
@@ -60,36 +61,28 @@ App = {
 
         var createIdentityInstance;
 
-        web3.eth.getAccounts(function(error, accounts) {
-            if (error) {
-                console.log(error);
-                return;
-            }
+        //var password = "12345678";
+        //web3.personal.unlockAccount(account, password, 100000);
+        App.contracts.IdentityFactory.deployed().then(function(instance) {
+            createIdentityInstance = instance;
+            console.log("start createIdentity:");
+            console.log(createIdentityInstance);
 
-            var account = accounts[0];
-            var password = "12345678";
-
-            web3.personal.unlockAccount(account, password, 100000);
-            App.contracts.IdentityFactory.deployed().then(function(instance) {
-                createIdentityInstance = instance;
-                console.log("start createIdentity:");
-                console.log(createIdentityInstance);
-
-                return createIdentityInstance.CreateProxyWithControllerAndRecovery(
+            return createIdentityInstance.CreateProxyWithControllerAndRecovery(
                     App.localData.userKey,
                     App.localData.delegates,
                     App.localData.longTimeLock,
                     App.localData.shortTimeLock,
-                    {from: account, to:'0xc8035fb56b1e90afdbb456543f5e9a42349359e0', gas:4000000}
+                    {from: App.localData.opaccount, gas:4000000}
                     );
-            }).then(function(result) {
-                console.log("deploy done:");
-                console.log(result);
-            }).catch(function(err) {
-                console.log("deploy error:");
-                console.log(err.message);
-            });
+        }).then(function(result) {
+            console.log("deploy done:");
+            console.log(result);
+        }).catch(function(err) {
+            console.log("deploy error:");
+            console.log(err.message);
         });
+
     }
 
 };

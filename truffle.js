@@ -1,5 +1,10 @@
 module.exports = {
   networks: {
+    testrpc: {
+      host: "139.199.180.239",
+      port: 8545,
+      network_id: "*" // Match any network id
+    },
     local: {
       host: "localhost",
       port: 8545,

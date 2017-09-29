@@ -6,7 +6,8 @@ App = {
         //httpProvider:'http://localhost:8545',
         httpProvider:'http://139.199.180.239:8545',
         opaccount:'0x2716eb344548927bff266b16edb10d9c911121f4',//yqtc test account
-        userKey:"0x107362a23d30ac84799d04718f7af836df59c9c9",
+        //idfactory:'0xe14cae734ac54c7bcecd56190f0d62b361416af4',//idfactory address
+        userKey:"0x2716eb344548927bff266b16edb10d9c911121f4",
         delegates:["0x2716eb344548927bff266b16edb10d9c911121f4", "0x2716eb344548927bff266b16edb10d9c911121f4"],
         longTimeLock: 86400,
         shortTimeLock: 7200,
@@ -66,6 +67,7 @@ App = {
         App.contracts.IdentityFactory.deployed().then(function(instance) {
             createIdentityInstance = instance;
             console.log("start createIdentity:");
+            console.log("IdentityFactory address:" + instance.address);
             console.log(createIdentityInstance);
 
             return createIdentityInstance.CreateProxyWithControllerAndRecovery(

@@ -49,6 +49,12 @@ App = {
             console.log(App.contracts.IdentityFactory);
         });
         console.log("init done");
+
+
+        $("#localdata").text(JSON.stringify(App.localData));
+        $("#deploy_useraddress").text("----");
+        $("#operator_useraddress").text(App.localData.opaccount);
+        $("#userkey_useraddress").text(App.localData.userKey);
         return App.bindEvents();
     },
 
@@ -65,6 +71,7 @@ App = {
         //var password = "12345678";
         //web3.personal.unlockAccount(account, password, 100000);
         App.contracts.IdentityFactory.deployed().then(function(instance) {
+            $("#deploy_useraddress").text(instance.address);
             createIdentityInstance = instance;
             console.log("start createIdentity:");
             console.log("IdentityFactory address:" + instance.address);

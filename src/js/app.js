@@ -1,7 +1,7 @@
 App = {
     web3Provider: null,
     contracts: {},
-
+/*
     localData:{
         //httpProvider:'http://localhost:8545',
         httpProvider:'http://139.199.180.239:8545',
@@ -12,7 +12,16 @@ App = {
         longTimeLock: 86400,
         shortTimeLock: 7200,
     },
-    
+ */   
+    localData:{
+        httpProvider:'http://139.199.180.239:9527',
+        opaccount:'0xd389f4f0d98b099df1aac3e0c7784c84d13691d0',//yqtc test account
+        //idfactory:'0xe14cae734ac54c7bcecd56190f0d62b361416af4',//idfactory address
+        userKey:"0xd389f4f0d98b099df1aac3e0c7784c84d13691d0",
+        delegates:["0xd389f4f0d98b099df1aac3e0c7784c84d13691d0"],
+        longTimeLock: 86400,
+        shortTimeLock: 7200,
+    },
     init: function() {
         // Load Address.
         // ...
